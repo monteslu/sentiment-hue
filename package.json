@@ -1,0 +1,19 @@
+{
+  "name": "sentiment-hue",
+  "version": "0.1.0",
+  "description": "Skynet plugin to change hue lights based on message sentiment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "https://github.com/monteslu/sentiment-hue.git",
+  "keywords": [
+    "skynet-plugin"
+  ],
+  "author": "Luis Montes",
+  "license": "MIT",
+  "dependencies": {
+    "sentiment": "~0.2.1",
+    "lodash": "~2.4.1"
+  }
+}
