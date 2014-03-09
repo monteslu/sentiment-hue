@@ -1,7 +1,6 @@
 var sentiment = require('sentiment');
 var _ = require('lodash');
 
-var heatsyncLights = [1,2,3];
 
 var red = {
   setState: {
@@ -62,6 +61,7 @@ var twitterColor = {
 function Plugin(messenger, options){
   this.messenger = messenger;
   this.options = options;
+  this.options.lightNumbers = this.options.lightNumbers.split(',');
   return this;
 }
 
@@ -72,14 +72,15 @@ function cloneMsg(msgHeader, lightColor, lightNumber){
   return msg;
 }
 
-Plugin.prototype.onMessage = function(data){
+Plugin.prototype.onMessage = function(message){
+  var data = message.payload || message.message || {};
   var self = this;
   if(data.text){
     sentiment(data.text, function(err, result){
       console.log(data.text, result);
       if(!err){
 
-        heatsyncLights.forEach(function(lightNumber){
+        this.options.lightNumbers.forEach(function(lightNumber){
           var light;
 
           if(result.score > 1){
@@ -111,7 +112,7 @@ Plugin.prototype.onMessage = function(data){
           var sendSentiment = function(){
             self.messenger.send(sentimentMsg, function(setErrw, ok){
               console.log(setErrw, ok);
-              setTimeout(sendWhite, 5000);
+              setTimeout(sendWhite, 10000);
             });
           };
 
@@ -145,6 +146,10 @@ var optionsSchema = {
   type: 'object',
   properties: {
     huePluginName: {
+      type: 'string',
+      required: true
+    },
+    lightNumbers: {
       type: 'string',
       required: true
     }

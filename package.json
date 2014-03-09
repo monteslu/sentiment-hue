@@ -1,6 +1,6 @@
 {
   "name": "sentiment-hue",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Skynet plugin to change hue lights based on message sentiment",
   "main": "index.js",
   "scripts": {
